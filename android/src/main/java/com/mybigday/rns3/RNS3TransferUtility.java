@@ -107,6 +107,10 @@ public class RNS3TransferUtility extends ReactContextBaseJavaModule {
         }
         WritableMap result = Arguments.createMap();
         WritableMap taskMap = convertTransferObserver(task);
+
+        // Bugfix - bytesTotal was not being passed
+        taskMap.putDouble("totalBytes", (double) bytesTotal);
+
         if (taskMap.getDouble("bytes") <= bytesTotal) {
           taskMap.putDouble("bytes", bytesCurrent);
         }

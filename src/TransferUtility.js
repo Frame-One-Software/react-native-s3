@@ -15,7 +15,7 @@ const defaultCognitoOptions = {
 };
 const storeKey = "@_RNS3_Tasks_Extra";
 /*
- * taskExtra: 
+ * taskExtra:
  *	 [id]:
  *		 iOS: { bucket, key, state, bytes, totalBytes }
  *		 Android: { bucket, key, bytes }
@@ -39,18 +39,33 @@ EventEmitter.addListener("@_RNS3_Events", async event => {
 		const { state, bytes, totalBytes } = task;
 		finalTask = await setTaskExtra(task, { state, bytes, totalBytes });
 	} else if (Platform.OS === "android") {
-		const { bytes } = task;
-		finalTask = await setTaskExtra(task, { bytes });
+		console.log("TransferUtility - addListener - task:" + JSON.stringify(task));
+		console.log("TransferUtility - addListener - error:" + JSON.stringify(error));
+
+		// Added Null check
+		if (task != null) {
+			const { bytes } = task;
+			finalTask = await setTaskExtra(task, { bytes });
+		}
 	}
-	if (listeners[task.id]) {
-		listeners[task.id].forEach(cb => cb(error, finalTask));
+	// Added Null check
+  if (task != null) {
+		if (listeners[task.id]) {
+			listeners[task.id].forEach(cb => cb(error, finalTask));
+		}
 	}
 });
 
 async function getTaskExtras() {
+  // console.log("TransferUtility - getTaskExtras");
 	try {
 		// https://github.com/lelandrichardson/react-native-mock/pull/106
-		taskExtras = await store.get(storeKey) || {};
+		// Eats resources
+		// taskExtras = await store.get(storeKey) || {};
+
+		// Runs fast
+    taskExtras =  {};
+
 	} catch (e) {
 		taskExtras = {};
 	}
@@ -58,15 +73,25 @@ async function getTaskExtras() {
 }
 
 function putExtra(task) {
+  // console.log("TransferUtility - putExtra");
+
 	if (!taskExtras[task.id]) return task;
 	return { ...task, ...taskExtras[task.id] };
 }
 
 function saveTaskExtras() {
-	return store.save(storeKey, taskExtras);
+  //    console.log("TransferUtility - saveTaskExtras");
+  // Eats resources
+  //	return store.save(storeKey, taskExtras);
+
+  // Runs fast
+  return taskExtras;
+
 }
 
 async function setTaskExtra(task, values, isNew) {
+  console.log("TransferUtility - setTaskExtra");
+
 	const { id } = task;
 	if (!taskExtras[id] || isNew) {
 		taskExtras[id] = values;
@@ -78,6 +103,8 @@ async function setTaskExtra(task, values, isNew) {
 				taskExtras[id] = { ...taskExtras[id], ...values };
 			}
 		} else if (Platform.OS === "android") {
+			console.log("TransferUtility - setTaskExtra - values:" + JSON.stringify(values));
+
 			if (values.bytes) {
 				taskExtras[id] = { ...taskExtras[id], ...values };
 			}
@@ -89,6 +116,7 @@ async function setTaskExtra(task, values, isNew) {
 
 export default class TransferUtility {
 	async setupWithNative() {
+    // console.log("TransferUtility - setupWithNative");
 		const result = await RNS3TransferUtility.setupWithNative();
 		if (result) {
 			await getTaskExtras();
@@ -98,6 +126,8 @@ export default class TransferUtility {
 	}
 
 	async setupWithBasic(options = {}) {
+    // console.log("TransferUtility - setupWithBasic");
+
 		const opts = snakeCaseKeys(options);
 		if (!opts.access_key || !opts.secret_key) {
 			return false;
@@ -114,6 +144,8 @@ export default class TransferUtility {
 	}
 
 	async setupWithCognito(options = {}) {
+    // console.log("TransferUtility - setupWithCognito");
+
 		const opts = snakeCaseKeys(options);
 		if (!opts.identity_pool_id) {
 			return false;
@@ -154,6 +186,8 @@ export default class TransferUtility {
 	}
 
 	async download(options = {}, others = {}) {
+	  	  	  	          // console.log("TransferUtility - download");
+
 		const opts = snakeCaseKeys(options);
 		const task = await RNS3TransferUtility.download({
 			...options,
