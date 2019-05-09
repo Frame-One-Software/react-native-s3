@@ -39,8 +39,8 @@ EventEmitter.addListener("@_RNS3_Events", async event => {
 		const { state, bytes, totalBytes } = task;
 		finalTask = await setTaskExtra(task, { state, bytes, totalBytes });
 	} else if (Platform.OS === "android") {
-		console.log("TransferUtility - addListener - task:" + JSON.stringify(task));
-		console.log("TransferUtility - addListener - error:" + JSON.stringify(error));
+    // console.log("TransferUtility - addListener - task:" + JSON.stringify(task));
+    // console.log("TransferUtility - addListener - error:" + JSON.stringify(error));
 
 		// Added Null check
 		if (task != null) {
@@ -90,7 +90,7 @@ function saveTaskExtras() {
 }
 
 async function setTaskExtra(task, values, isNew) {
-  console.log("TransferUtility - setTaskExtra");
+  //console.log("TransferUtility - setTaskExtra");
 
 	const { id } = task;
 	if (!taskExtras[id] || isNew) {
@@ -103,7 +103,7 @@ async function setTaskExtra(task, values, isNew) {
 				taskExtras[id] = { ...taskExtras[id], ...values };
 			}
 		} else if (Platform.OS === "android") {
-			console.log("TransferUtility - setTaskExtra - values:" + JSON.stringify(values));
+			//console.log("TransferUtility - setTaskExtra - values:" + JSON.stringify(values));
 
 			if (values.bytes) {
 				taskExtras[id] = { ...taskExtras[id], ...values };

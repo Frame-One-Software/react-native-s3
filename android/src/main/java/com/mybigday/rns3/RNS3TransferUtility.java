@@ -101,6 +101,7 @@ public class RNS3TransferUtility extends ReactContextBaseJavaModule {
 
       @Override
       public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+        System.out.println("TASK ID:" + id);
         TransferObserver task = transferUtility.getTransferById(id);
         if (task.getState().toString().equals("IN_PROGRESS") && !enabledProgress) {
           return;
@@ -179,6 +180,20 @@ public class RNS3TransferUtility extends ReactContextBaseJavaModule {
       default:
         return false;
     }
+    // TODO: TransferNetworkLossHandler
+//    TransferNetworkLossHandler.getInstance(context);
+//TODO
+//    TransferUtility transferUtility =
+//            TransferUtility.builder()
+//                    .context(context.getApplicationContext())
+//                    .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+//                    .s3Client(new AmazonS3Client(AWSMobileClient.getInstance()))
+//                    .build();
+
+//    BasicAWSCredentials creds = new BasicAWSCredentials("access_key", "secret_key");
+//    AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(creds)).build();
+//TODO
+
     // TODO: support ClientConfiguration
     if (credentials != null) {
       s3 = new AmazonS3Client(credentials);
