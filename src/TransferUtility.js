@@ -39,8 +39,8 @@ EventEmitter.addListener("@_RNS3_Events", async event => {
 		const { state, bytes, totalBytes } = task;
 		finalTask = await setTaskExtra(task, { state, bytes, totalBytes });
 	} else if (Platform.OS === "android") {
-    // console.log("TransferUtility - addListener - task:" + JSON.stringify(task));
-    // console.log("TransferUtility - addListener - error:" + JSON.stringify(error));
+		// console.log("TransferUtility - addListener - task:" + JSON.stringify(task));
+		// console.log("TransferUtility - addListener - error:" + JSON.stringify(error));
 
 		// Added Null check
 		if (task != null) {
