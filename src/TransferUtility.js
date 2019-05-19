@@ -31,6 +31,9 @@ if (Platform.OS === "ios") {
 }
 
 EventEmitter.addListener("@_RNS3_Events", async event => {
+	// console.log("*************************")
+	// console.log("** S3 addListener")
+	// console.log("*************************")
 	if (!taskExtras) await getTaskExtras();
 	const { task, error } = event;
 
@@ -61,10 +64,10 @@ async function getTaskExtras() {
 	try {
 		// https://github.com/lelandrichardson/react-native-mock/pull/106
 		// Eats resources
-		// taskExtras = await store.get(storeKey) || {};
+		taskExtras = await store.get(storeKey) || {};
 
 		// Runs fast
-    taskExtras =  {};
+    // taskExtras =  {};
 
 	} catch (e) {
 		taskExtras = {};
@@ -82,10 +85,10 @@ function putExtra(task) {
 function saveTaskExtras() {
   //    console.log("TransferUtility - saveTaskExtras");
   // Eats resources
-  //	return store.save(storeKey, taskExtras);
+  	return store.save(storeKey, taskExtras);
 
   // Runs fast
-  return taskExtras;
+  // return taskExtras;
 
 }
 
