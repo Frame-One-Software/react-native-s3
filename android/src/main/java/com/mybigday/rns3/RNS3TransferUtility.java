@@ -25,7 +25,10 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
 
 import com.amazonaws.services.s3.*;
+// Updated to handle special chars issue in file key name
+import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.s3.transferutility.*;
+
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.WritableArray;
@@ -101,8 +104,17 @@ public class RNS3TransferUtility extends ReactContextBaseJavaModule {
 
       @Override
       public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-        System.out.println("TASK ID:" + id);
+        //System.out.println("TASK ID:" + id);
         TransferObserver task = transferUtility.getTransferById(id);
+
+        // Updated to handle special chars issue in file key name
+        // Added Null Check to prevent
+        // AndroidRuntime: java.lang.NullPointerException: Attempt to invoke
+        // virtual method 'com.amazonaws.mobileconnectors.s3.transferutility.TransferState
+        // com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver.getState()' on a null object reference
+        if (task == null) {
+          return;
+        }
         if (task.getState().toString().equals("IN_PROGRESS") && !enabledProgress) {
           return;
         }
@@ -180,19 +192,9 @@ public class RNS3TransferUtility extends ReactContextBaseJavaModule {
       default:
         return false;
     }
-    // TODO: TransferNetworkLossHandler
-//    TransferNetworkLossHandler.getInstance(context);
-//TODO
-//    TransferUtility transferUtility =
-//            TransferUtility.builder()
-//                    .context(context.getApplicationContext())
-//                    .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
-//                    .s3Client(new AmazonS3Client(AWSMobileClient.getInstance()))
-//                    .build();
 
-//    BasicAWSCredentials creds = new BasicAWSCredentials("access_key", "secret_key");
-//    AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(creds)).build();
-//TODO
+    // Updated to handle special chars issue in file key name
+   TransferNetworkLossHandler.getInstance(context);
 
     // TODO: support ClientConfiguration
     if (credentials != null) {
@@ -201,7 +203,14 @@ public class RNS3TransferUtility extends ReactContextBaseJavaModule {
       s3 = new AmazonS3Client(credentialsProvider);
     }
     s3.setRegion(region);
-    transferUtility = new TransferUtility(s3, context);
+    //transferUtility = new TransferUtility(s3, context);
+
+	transferUtility = TransferUtility.builder()
+						.context(context)
+						.awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+						.s3Client(s3)
+						.build();
+
     return true;
   }
 

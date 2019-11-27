@@ -78,6 +78,7 @@ repositories {
     }
 }
 
+
 dependencies {
     //compile 'com.facebook.react:react-native:+'
     compile('com.facebook.react:react-native:0.61.4') { force = true }
@@ -85,12 +86,17 @@ dependencies {
     // compile 'com.amazonaws:aws-android-sdk-core:2.3.+'
     // compile 'com.amazonaws:aws-android-sdk-cognito:2.3.+'
     // compile 'com.amazonaws:aws-android-sdk-s3:2.3.+'
-   compile 'com.amazonaws:aws-android-sdk-core:2.6.30'
-   compile 'com.amazonaws:aws-android-sdk-cognito:2.6.30'
-   compile 'com.amazonaws:aws-android-sdk-s3:2.6.30'
-  // compile 'com.amazonaws:aws-android-sdk-core:2.13.4'
-  // compile 'com.amazonaws:aws-android-sdk-cognito:2.13.4'
-  // compile 'com.amazonaws:aws-android-sdk-s3:2.13.4'
+
+    //WORKS
+    //  compile 'com.amazonaws:aws-android-sdk-core:2.6.30'
+    //  compile 'com.amazonaws:aws-android-sdk-cognito:2.6.30'
+    //  compile 'com.amazonaws:aws-android-sdk-s3:2.6.30'
+
+    // Updated to handle special chars issue in file key name
+    compile 'com.amazonaws:aws-android-sdk-core:2.16.4'
+    compile 'com.amazonaws:aws-android-sdk-cognito:2.16.4'
+    compile 'com.amazonaws:aws-android-sdk-s3:2.16.4'
+    compile 'com.amazonaws:aws-android-sdk-mobile-client:2.16.4'
 
 }
 allprojects {
