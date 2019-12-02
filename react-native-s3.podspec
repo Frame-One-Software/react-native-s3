@@ -10,12 +10,10 @@ Pod::Spec.new do |s|
   s.homepage     = package["homepage"]
   s.license      = package["license"]
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/mybigday/react-native-s3.gi", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/travismgibson/react-native-s3.gi", :tag => "#{s.version}" }
   s.source_files  = "ios/RNS3/*.{h,m}"
   s.dependency "React"
 end
-
-
 
 # Pod::Spec.new do |s|
 #   s.name           = package['name']

@@ -1,17 +1,15 @@
 {
   "name": "react-native-s3",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "A React Native wrapper for AWS S3 SDK",
   "main": "./src/index.js",
   "files": ["android/", "ios/", "src/"],
   "scripts": {
-    "lint": "eslint src test example/*.js",
-    "test": "npm run lint && mocha",
     "prepublish": "npm test && ./scripts/download-ios.sh 2.5.2 && rm -rf ./ios/RNS3.xcodeproj/xcuserdata ./ios/RNS3.xcodeproj/project.xcworkspace"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mybigday/react-native-s3.git"
+    "url": "git+https://github.com/travismgibson/react-native-s3.git"
   },
   "keywords": ["react", "native", "aws", "s3", "transferutility"],
   "author": "Travis Gibson <travismgibson@gmail.com",
