@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.license      = package["license"]
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/yamill/react-native-orientation.git", :tag => "#{s.version}" }
-  s.source_files  = "ios/*.{h,m}"
+  s.source_files  = "ios/RNS3/*.{h,m}"
   s.dependency "React"
 end
 
