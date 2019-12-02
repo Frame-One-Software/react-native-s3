@@ -1,6 +1,6 @@
 {
   "name": "react-native-s3",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "description": "A React Native wrapper for AWS S3 SDK",
   "main": "./src/index.js",
   "files": ["android/", "ios/", "src/"],
@@ -13,7 +13,8 @@
     "url": "git+https://github.com/travismgibson/react-native-s3.git"
   },
   "keywords": ["react", "native", "aws", "s3", "transferutility"],
-  "author": "Travis Gibson <travismgibson@gmail.com",
+  "author": "Travis Gibson <travismgibson@gmail.com>",
+  "homepage": "https://github.com/travismgibson/react-native-s3.git",
   "license": "MIT",
   "dependencies": {
     "react-native-simple-store": "^1.0.1",

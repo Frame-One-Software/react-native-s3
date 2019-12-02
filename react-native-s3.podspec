@@ -4,14 +4,15 @@ package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
   s.name           = package["name"]
-  s.version      = package["version"]
-  s.summary      = package["description"]
-  s.author       = 'travisgibson'
-  s.homepage     = package["homepage"]
-  s.license      = package["license"]
+  s.version        = package["version"]
+  s.summary        = package["description"]
+  s.author         = 'travisgibson'
+  s.license        = package['license']
+  s.author         = package['author']
+  s.homepage       = package['homepage']
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/travismgibson/react-native-s3.gi", :tag => "#{s.version}" }
-  s.source_files  = "ios/RNS3/*.{h,m}"
+  s.source       = { :git => "https://github.com/travismgibson/react-native-s3.git", :tag => "#{s.version}" }
+  #s.source_files  = "ios/RNS3/*.{h,m}"
   s.dependency "React"
 end
 
