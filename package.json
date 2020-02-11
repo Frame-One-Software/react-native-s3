@@ -3,18 +3,18 @@
   "version": "0.0.39",
   "description": "A React Native wrapper for AWS S3 SDK",
   "main": "./src/index.js",
-  "files": ["android/", "ios/", "src/"],
+  "files": ["android/", "ios/", "src/", "react-native-s3.podspec"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "npm test && ./scripts/download-ios.sh 2.5.2 && rm -rf ./ios/RNS3.xcodeproj/xcuserdata ./ios/RNS3.xcodeproj/project.xcworkspace"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/travismgibson/react-native-s3.git"
+    "url": "git+https://github.com/Frame-One-Software/react-native-s3.git"
   },
   "keywords": ["react", "native", "aws", "s3", "transferutility"],
-  "author": "Travis Gibson <travismgibson@gmail.com>",
-  "homepage": "https://github.com/travismgibson/react-native-s3.git",
+  "author": "Frame One Software <christopher@frameonesoftware.com>",
+  "homepage": "https://github.com/Frame-One-Software/react-native-s3.git",
   "license": "MIT",
   "dependencies": {
     "react-native-simple-store": "^1.0.1",
