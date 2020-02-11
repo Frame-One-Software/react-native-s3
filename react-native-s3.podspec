@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.name           = package["name"]
   s.version        = package["version"]
   s.summary        = package["description"]
-  s.author         = 'travisgibson'
+  s.author         = 'Frame-One-Software'
   s.license        = package['license']
   s.author         = package['author']
   s.homepage       = package['homepage']
